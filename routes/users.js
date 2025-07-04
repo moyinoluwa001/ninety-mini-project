@@ -1,4 +1,3 @@
-// routes/users.js
 const express = require('express');
 const router = express.Router();
 const pool = require('../db');
@@ -25,7 +24,7 @@ router.post(
   }
 );
 
-// READ all
+// READ ALL
 router.get('/users', async (req, res) => {
   try {
     const result = await pool.query('SELECT * FROM users');
