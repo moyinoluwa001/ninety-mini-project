@@ -1,6 +1,22 @@
 # Express.js PostgreSQL CRUD API
 
-This is a simple RESTful API built with Express.js and PostgreSQL that allows you to perform basic CRUD (Create, Read, Update, Delete) operations on a `users` table.
+This project is a simple RESTful API built with Express.js and PostgreSQL. It allows you to perform basic CRUD (Create, Read, Update, Delete) operations on a `users` table.
+
+## Project Structure
+
+```
+ninty mini project/
+│
+├── index.js                # Main entry point for the Express app
+├── routes/
+│   └── users.js            # Express router for user endpoints
+├── controllers/
+│   └── usersController.js  # Controller functions for user CRUD logic
+├── db.js                   # PostgreSQL connection pool setup
+├── .env                    # Environment variables (not committed)
+├── package.json
+└── README.md
+```
 
 ## Features
 
@@ -16,15 +32,15 @@ This is a simple RESTful API built with Express.js and PostgreSQL that allows yo
 
 ## Setup
 
-1. **Clone the repository** (if applicable) or copy the code to your project directory.
+1. **Clone the repository** or copy the code to your project directory.
 
 2. **Install dependencies:**
    ```bash
-   npm install express body-parser pg
+   npm install
    ```
 
 3. **Configure PostgreSQL:**
-   - Create a database named `mydb` (or change the name in the code).
+   - Create a database named `mydb` (or change the name in your `.env` file).
    - Create a `users` table:
      ```sql
      CREATE TABLE users (
@@ -33,15 +49,14 @@ This is a simple RESTful API built with Express.js and PostgreSQL that allows yo
        email VARCHAR(100)
      );
      ```
-   - Update the PostgreSQL credentials in `index.js`:
-     ```js
-     const pool = new Pool({
-       user: 'your_pg_username',
-       host: 'localhost',
-       database: 'mydb',
-       password: 'your_pg_password',
-       port: 5432,
-     });
+   - Create a `.env` file in the root directory with your database credentials:
+     ```
+     PGUSER=your_pg_username
+     PGPASSWORD=your_pg_password
+     PGHOST=localhost
+     PGPORT=5432
+     PGDATABASE=mydb
+     PORT=3000
      ```
 
 4. **Run the server:**
@@ -49,23 +64,23 @@ This is a simple RESTful API built with Express.js and PostgreSQL that allows yo
    node index.js
    ```
 
-5. **API Endpoints:**
+## API Endpoints
 
-   - `POST /users`  
-     Create a new user.  
-     **Body:** `{ "name": "John", "email": "john@example.com" }`
+- `POST /users`  
+  Create a new user.  
+  **Body:** `{ "name": "John", "email": "john@example.com" }`
 
-   - `GET /users`  
-     Get all users.
+- `GET /users`  
+  Get all users.
 
-   - `PUT /users/:id`  
-     Update a user by ID.  
-     **Body:** `{ "name": "Jane", "email": "jane@example.com" }`
+- `PUT /users/:id`  
+  Update a user by ID.  
+  **Body:** `{ "name": "Jane", "email": "jane@example.com" }`
 
-   - `DELETE /users/:id`  
-     Delete a user by ID.
+- `DELETE /users/:id`  
+  Delete a user by ID.
 
-## Example Request (using curl)
+## Example Requests (using curl)
 
 ```bash
 # Create a user
@@ -81,3 +96,7 @@ curl -X PUT -H "Content-Type: application/json" -d '{"name":"Bob","email":"bob@e
 curl -X DELETE http://localhost:3000/users/1
 ```
 
+## Notes
+
+- Make sure to add `.env` and `node_modules/` to your `.gitignore` file.
+- The code is modular: routing, controller logic, and database connection are separated
